@@ -79,8 +79,32 @@ def plot_temp_change(city_name: str, year: int, df: DataFrame) -> None:
     plt.show()
 
 
+def plot_change_compare(city1: str, city2: str, year: int, df: DataFrame) -> None:
+    """
+    Given two cities and start year, plot a figure to show the percentage of change, based on the start value
+    :param city1: str, the first city's name
+    :param city2: str, the second city's name
+    :param year: int, input start year
+    :param df: pandas.Dataframe, a well cleaned dataframe, including related infos
+    :return: None, (with a plot to show)
+    """
+    df = df[df.Year >= year]
+    city1_case = df[df.city == city1]
+    city2_case = df[df.city == city2]
+    # compute the percentage of change
+    plt.plot(city1_case.Year, city1_case.AvgTemp / city1_case.AvgTemp.iloc[0] * 100)
+    plt.plot(city2_case.Year, city2_case.AvgTemp / city2_case.AvgTemp.iloc[0] * 100)
+    plt.legend([city1, city2])
+    plt.xlabel("year")
+    plt.ylabel("temperature change (temp / start * 100)")
+    plt.title("temperature change comparison, since {}".format(year))
+    plt.savefig("sample_output/output2.png")
+    plt.show()
+
+
 if __name__ == "__main__":
     tem_data = get_avg_temp("h1_data/GlobalLandTemperaturesByCity.csv")
     asc_data = get_unique_ascii("h1_data/worldcities.csv")
     joined_data = join_data(tem_data, asc_data)
     plot_temp_change("Miami", 1980, joined_data)
+    plot_change_compare('Seattle', 'Miami', 1950, joined_data)

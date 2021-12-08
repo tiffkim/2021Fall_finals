@@ -107,4 +107,4 @@ if __name__ == "__main__":
     asc_data = get_unique_ascii("h1_data/worldcities.csv")
     joined_data = join_data(tem_data, asc_data)
     plot_temp_change("Miami", 1980, joined_data)
-    plot_change_compare('Seattle', 'Miami', 1950, joined_data)
+    plot_change_compare("Seattle", "Miami", 1950, joined_data)

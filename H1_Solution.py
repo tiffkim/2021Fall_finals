@@ -76,7 +76,7 @@ def plot_temp_change(city_name: str, year: int, df: DataFrame) -> None:
     plt.ylabel("temperature(°C)")
     plt.title("temperature change at {}, since {}".format(city_name, year))
     plt.savefig("sample_output/output1.png")
-    plt.show()
+    # plt.show()
 
 
 def plot_change_compare(city1: str, city2: str, year: int, df: DataFrame) -> None:
@@ -99,12 +99,48 @@ def plot_change_compare(city1: str, city2: str, year: int, df: DataFrame) -> Non
     plt.ylabel("temperature change (temp / start * 100)")
     plt.title("temperature change comparison, since {}".format(year))
     plt.savefig("sample_output/output2.png")
-    plt.show()
+    # plt.show()
+
+
+def change_in_100years(df: DataFrame) -> None:
+    """
+    Given a dataframe of city and temperature in different years, create a scatter plot that shows
+    the temperature change from 1901 to 2000, according their latitude value
+    :param df: pandas.Dataframe, raw temperature data for city in different years
+    :return: None, with a plot shows
+    """
+    df = df[df.lat >= 0]  # get only northern hemisphere
+    df = df[df.Year.between(1901, 2000)]  # take data between 1901 and 2000
+    # group by city and calculate the difference between first temp and last temp
+    grouped_data = df.groupby(["city", "lat"])["AvgTemp"].agg(["first", "last"])
+    grouped_data["diffs"] = grouped_data["last"] - grouped_data["first"]
+    grouped_data = grouped_data.reset_index()
+    # print(grouped_data)
+    # create the scatter plot
+    plt.scatter(grouped_data["lat"], grouped_data["diffs"])
+    plt.xlabel("latitude")
+    plt.ylabel("temperature change (1901--2000)")
+    plt.title("scatter plot of temperature changes in various cities")
+    plt.savefig("sample_output/output3.png")
+    # plt.show()
+    # return grouped_data
 
 
 if __name__ == "__main__":
+
+    # process and clean the data files
     tem_data = get_avg_temp("h1_data/GlobalLandTemperaturesByCity.csv")
     asc_data = get_unique_ascii("h1_data/worldcities.csv")
+
+    # join the table for use, mapping city to ascii name
     joined_data = join_data(tem_data, asc_data)
+
+    # print(joined_data)
+    # plot temperature change for given city
     plot_temp_change("Miami", 1980, joined_data)
+
+    # comparison of the rate of change between the two cities
     plot_change_compare("Seattle", "Miami", 1950, joined_data)
+
+    # plot the scatter plot, changes by latitude
+    change_in_100years(joined_data)

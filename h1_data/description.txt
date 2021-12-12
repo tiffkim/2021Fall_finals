@@ -1,0 +1,7 @@
+# this folder is data files used in #1 hypothesis
+
+the 'GlobalLandTemperaturesByCity.csv' is 500MBs, which is too large to upload,
+so we upload the sample data as 'GlobalTemperatures_Sample.data'
+
+here is the link for original data:
+https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data?select=GlobalLandTemperaturesByCity.csv

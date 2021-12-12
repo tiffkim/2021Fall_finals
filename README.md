@@ -49,6 +49,14 @@ The GDP data I obtained is in percentage for annual growth. I had to think about
 
 ## Results
 ### Hypothesis #1
+The following graph shows the temperature changes based on given city and start year
+![](sample_output/output1.png)
+  
+The following graph shows the comparison of temperature change rate between two cities
+![](sample_output/output2.png)
+  
+The following graph shows the distribution of temperature change based on latitude level in hte past 100 years
+![](sample_output/output3.png)
 
 
 ### Hypothesis #2
@@ -69,8 +77,9 @@ This is the list of countries that are in the 25th percentile of population/GDP 
 ## Conclusion
 
 ### Hypothesis #1
-According to my analysis. The increase in temperature is negatively correlated with the increase in dimensionality. In other words, the closer the equator is, the less significant the weather changes. The farther the equator is, the more obvious the degree of change.
-On the other hand, weather changes in a single country in the past 100 years have shown an overall upward trend. In stages, it is distributed in a zigzag pattern. It generally rises for one or two years and then falls for one or two years. This is more in line with the laws of nature and shows that extreme weather caused by human behavior and environmental damage has occurred frequently in recent times.
+According to my analysis:
+1. The increase in temperature is negatively correlated with the increase in dimensionality. In other words, the closer the equator is, the less significant the weather changes. The farther the equator is, the more obvious the degree of change.
+2. On the other hand, weather changes in a single country in the past 100 years have shown an overall upward trend. In stages, it is distributed in a zigzag pattern. It generally rises for one or two years and then falls for one or two years. This is more in line with the laws of nature and shows that extreme weather caused by human behavior and environmental damage has occurred frequently in recent times.
 
 ### Hypothesis #2
 Based on the data analysis, the hypothesis: *Countries with ascending GDP and population have growing CO2 emission per capita than

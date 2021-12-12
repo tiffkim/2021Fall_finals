@@ -1,7 +1,8 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
-#Hypothesis #2: Countries with ascending GDP and population emit higher CO2 per capita than
-#countries with descending GDP. Datasets needed: GDP, population, CO2 emission by countries
+#Hypothesis #2: Countries with ascending GDP and population have growing CO2 emission per capita than
+#countries with descending GDP and population. Datasets needed: GDP, population, CO2 emission by countries
 
 
 def get_data(filename: str) -> pd.DataFrame:
@@ -61,6 +62,43 @@ def get_country_data(df):
         avg_co2.append(calculate_avg_growth(grouped, country, "Annual CO2 emissions (per capita)"))
     data = {"country": countries, "population growth": pop_growths, "gdp growth": gdp_growths, "avg co2": avg_co2}
     return pd.DataFrame(data)
+
+def plot_correlation(population growth: pd.Series, gdp growth: pd.Series, avg co2: pd.Series, country_df: DataFrame) -> None:
+    """
+    Given three variables: population growth and gdp growth percentage and average co2 emission in percentage.
+    :param population growth: pd.Series, the population growth percentage values
+    :param gdp growth: pd.Series, the gdp growth percentage values
+    :param avg co2: pd.Series, the average growth of co2 emission in percentage
+    :param country_df: pandas.Dataframe, all three variables by countries
+    :return: None, (with a plot to show)
+    """
+    x = country_df["population growth"]
+    y = country_df["gdp growth"]
+    c = country_df["avg co2"]
+    # Plot...
+    plt.scatter(x, y, c=c)
+    cbar = plt.colorbar()
+    cbar.set_label('Average Increas in Co2 Emission%')
+    plt.xlabel('population growth %')
+    plt.ylabel('gdp growth %')
+    plt.title('Average CO2 emission growth percentage by population growth and gdp growth')
+    plt.show()
+
+def get_percentile(country_df):
+    """
+    Given th.
+    :param population growth: pd.Series, the population growth percentage values
+    :param gdp growth: pd.Series, the gdp growth percentage values
+    :param avg co2: pd.Series, the average growth of co2 emission in percentage
+    :param country_df: pandas.Dataframe, all three variables by countries
+    :return: None, (with a plot to show)
+    """
+    country_df.loc[(country_df["population growth"] < country_df["population growth"].quantile(0.25)) & (
+                country_df["gdp growth"] < country_df["gdp growth"].quantile(0.25)), "label"] = "lower"
+    country_df.loc[(country_df["population growth"] > country_df["population growth"].quantile(0.75)) & (
+                country_df["gdp growth"] > country_df["gdp growth"].quantile(0.75)), "label"] = "higher"
+    country_df.dropna(inplace=True)
+    return country_df
 
 
 if __name__ == "__main__":

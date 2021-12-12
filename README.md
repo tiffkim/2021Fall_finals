@@ -38,22 +38,23 @@ Some of the challenges occurred during the data analysis...
 During the analysis, I meet some problems. First, for the data sets i got, the format is not very structured, I should convert the country name to ascii name. also, to extract month and year information from the date, also utilize the group functions to calculate max-min difference and average/mean value. I overcome these one by one, which practice my understanding of panda’s data frame. Another point is I see that the change of temperature has a negative relationship with latitude increasing. But i am curious about why contribute that relation. I tried to fit that data to some statistical model to dive deeply but can't find an appropriate model.
 
 ### Hypothesis #2
-Some of the challenges occurred during the data analysis...
+Some of the challenges occurred during the data analysis.../
 Initial stage of forming hypothesis, I wasn't sure what the timeframe should be for data analysis. Many data analysis on global warming and climate change usually looks at pre-industrialization vs. post-industrialization. A lot of analysis has already been done and I wanted to look at more recent data and see any trends on which countries are emitting more CO2 recently relation to their population and GDP growth. Thus, I decided to look at the past decade. *Year 2020 is excluded due to Covid-19 impact in world's economy.
 
-The GDP data I obtained is in percentage for annual growth. I had to think about how I am going to determine "ascending" GDP. Do I look at 2019 data and see if it was positive? Do I compared 2019 data to 2010 data? What is the country fluctuated a lot? With all these questions in mind, I thought it would best to get the aggregated values. Thus, I took the average growth of each country's GDP data for year 2010 to year 2019. Same calculation is done for other two datasets: population and CO2 emission.
+The GDP data I obtained is in percentage for annual growth. I had to think about how I am going to determine "ascending" GDP. Do I look at 2019 data and see if it was positive? Do I compare 2019 data to 2010 data? What is the country fluctuated a lot? With all these questions in mind, I thought it would best to get the aggregated values. Thus, I took the average growth of each country's GDP data for year 2010 to year 2019. Same calculation is done for other two datasets: population and CO2 emission.
 
 
 ## Results
 ### Hypothesis #1
 
-## Results
+
 ### Hypothesis #2
+The first plot is a scatter plot using a color gradient. X-axis is the population growth and the y-axis is the GDP growth. Using the color bar, you can tell that not many countries on the chart are emitting CO2 except for the on outlier. This outlier is making the two big groups to be closer than they actually are. 
 
-
-##Conclusion
+## Conclusion
 
 2. Conclusion: According to my analysis. The increase in temperature is negatively correlated with the increase in dimensionality. In other words, the closer the equator is, the less significant the weather changes. The farther the equator is, the more obvious the degree of change.
 On the other hand, weather changes in a single country in the past 100 years have shown an overall upward trend. In stages, it is distributed in a zigzag pattern. It generally rises for one or two years and then falls for one or two years. This is more in line with the laws of nature and shows that extreme weather caused by human behavior and environmental damage has occurred frequently in recent times.
 
+## Future Research Ideas
 

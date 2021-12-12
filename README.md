@@ -20,7 +20,7 @@ The idea behind looking at the countries closer to the equator is the nature of 
 Hypothesis #2: Countries with ascending GDP and population have growing CO2 emission per capita than
 countries with descending GDP and population.
 Datasets needed: GDP, population, CO2 emission by countries
-The motif behind this hypothesis is the idea of [developing countries vs. developed countries](https://keydifferences.com/difference-between-developed-countries-and-developing-countries.html). Since developed countries have access to personal automobiles and more materials in general, I thought developed countries would emit more CO2 compared to the developing countries per capita.
+The motif behind this hypothesis is the idea of [developing countries vs. developed countries](https://keydifferences.com/difference-between-developed-countries-and-developing-countries.html). Since developed countries have access to personal automobiles and have higher standards of living in general, I thought developed countries would emit more CO2 compared to the developing countries per capita.
 
 ### Data Sets
 Datasets for hypothesis #1
@@ -53,8 +53,14 @@ The GDP data I obtained is in percentage for annual growth. I had to think about
 
 ### Hypothesis #2
 The first plot is a scatter plot using a color gradient. X-axis is the population growth and the y-axis is the GDP growth. Using the color bar, you can tell that not many countries on the chart are emitting CO2 except for the on outlier. This outlier is making the two big groups to be closer than they actually are. 
-
-As you can see, countries with low population and GDP growth emit on average have low CO2 emission per capita. 
+![](images/scatterplot.png)
+As you can see, countries with low population and GDP growth emit on average have low CO2 emission per capita. These two big groups on the scatter plot are created by the function in the code where 25th percentile and 75th percentile were taken to see which countries are growing higher than others. 
+![](images/boxplot.png)
+The boxplot portrays a similar result as the scatter plot. You can see the outliers more clearly in this plot though. So I wanted to investigated about the outliers.
+![](images/higher.png)
+This is the list of countries that are in the 75th percentile of population/GDP growth. These countries have been seeing a lot of growth in the past decade, but making much CO2 emission per capita. Qatar has a significantly higher CO2 emission per capita. Qatar is also the [14th largest](https://www.worldometers.info/oil/oil-production-by-country/) oil producing country by yearly oil production. 
+![](images/lower.png)
+This is the list of countries that are in the 25th percentile of population/GDP growth. Most of these are the countries that have been losing population in the past decade. 
 
 ## Conclusion
 

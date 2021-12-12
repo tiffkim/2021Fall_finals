@@ -14,10 +14,13 @@ With our research background, we have developed two hypotheses to test using the
 Hypothesis #1: Countries closer to the equator experience higher average temperature increase than the countries 
 farther from the equator in the past 50 years.  (In percentage )
 Datasets needed: latitude and longitude library, country map, country temperatures
+The idea behind looking at the countries closer to the equator is the nature of high temperature in those areas. Since they are closest to the sun, they would see the impact of temerpature rising quicker and more than countries further away from the equator.
+
 
 Hypothesis #2: Countries with ascending GDP and population have growing CO2 emission per capita than
 countries with descending GDP and population.
 Datasets needed: GDP, population, CO2 emission by countries
+The motif behind this hypothesis is the idea of [developing countries vs. developed countries](https://keydifferences.com/difference-between-developed-countries-and-developing-countries.html). Since developed countries have access to personal automobiles and more materials in general, I thought developed countries would emit more CO2 compared to the developing countries per capita.
 
 ### Data Sets
 Datasets for hypothesis #1
@@ -50,6 +53,8 @@ The GDP data I obtained is in percentage for annual growth. I had to think about
 
 ### Hypothesis #2
 The first plot is a scatter plot using a color gradient. X-axis is the population growth and the y-axis is the GDP growth. Using the color bar, you can tell that not many countries on the chart are emitting CO2 except for the on outlier. This outlier is making the two big groups to be closer than they actually are. 
+
+As you can see, countries with low population and GDP growth emit on average have low CO2 emission per capita. 
 
 ## Conclusion
 

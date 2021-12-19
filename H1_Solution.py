@@ -9,13 +9,20 @@ def get_unique_ascii(file: str) -> DataFrame:
     Given the country data, return a pandas dataframe, with cleaned city-city_ascii mapping
     :param file: str, countries' csv data file
     :return: a cleaned pandas dataframe
+    >>> file = "h1_data/worldcities.csv"
+          city city_ascii      lat
+    0    Tokyo      Tokyo  35.6897
+    1  Jakarta    Jakarta  -6.2146
+    2    Delhi      Delhi  28.6600
+    3   Mumbai     Mumbai  18.9667
+    4   Manila     Manila  14.6000
     """
     df = pd.read_csv(file)
     df = df.dropna()
     # print(df)
     df = df[["city", "city_ascii", "lat"]]
     df = df.drop_duplicates(subset=["city"])  # remove duplicates
-    # print(df)
+    # print(df.head())
     return df
 
 
@@ -25,6 +32,27 @@ def join_data(temp_data: DataFrame, ascii_data: DataFrame) -> DataFrame:
     :param temp_data: the cleaned temperature dataframe
     :param ascii_data: the cleaned city-city_ascii mapping dataframe
     :return: a joined and cleaned dataframe
+    >>> temp_data =
+         city  Year   AvgTemp
+    0  Århus  1743  6.068000
+    1  Århus  1744  9.007125
+    2  Århus  1745  0.026500
+    3  Århus  1750  8.725545
+    4  Århus  1751  8.046375
+    >>> ascii_data =
+        city city_ascii      lat
+    0    Tokyo      Tokyo  35.6897
+    1  Jakarta    Jakarta  -6.2146
+    2    Delhi      Delhi  28.6600
+    3   Mumbai     Mumbai  18.9667
+    4   Manila     Manila  14.6000
+
+        city    Year   AvgTemp city_ascii  lat
+    0  Århus  1743.0  6.068000        NaN  NaN
+    1  Århus  1744.0  9.007125        NaN  NaN
+    2  Århus  1745.0  0.026500        NaN  NaN
+    3  Århus  1750.0  8.725545        NaN  NaN
+    4  Århus  1751.0  8.046375        NaN  NaN
     """
     # joined_df = temp_data.set_index('City').join(asc_data.set_index('city'))
     # merge the two tables, based on common column
@@ -34,7 +62,7 @@ def join_data(temp_data: DataFrame, ascii_data: DataFrame) -> DataFrame:
         subset=["city", "Year"], keep="last"
     ).reset_index(drop=True)
     new_df.dropna()
-    # print(new_df)
+    print(new_df.head())
     return new_df
 
 
@@ -43,6 +71,13 @@ def get_avg_temp(file: str) -> DataFrame:
     Given a csv date with country, monthly temperature
     :param file: str, a csv data file
     :return: pandas.dataframe
+    >>> file = "h1_data/GlobalLandTemperaturesByCity.csv"
+         city  Year   AvgTemp
+    0  Århus  1743  6.068000
+    1  Århus  1744  9.007125
+    2  Århus  1745  0.026500
+    3  Århus  1750  8.725545
+    4  Århus  1751  8.046375
     """
     df = pd.read_csv(file)
     df = df.dropna()
@@ -55,7 +90,7 @@ def get_avg_temp(file: str) -> DataFrame:
     group_df = df.groupby(["city", "Year"])
     mean_df = group_df["AvgTemp"].mean()
     mean_df = mean_df.reset_index()
-    # print(mean_df)
+    # print(mean_df.head())
     return mean_df
 
 
@@ -67,6 +102,17 @@ def plot_temp_change(city_name: str, year: int, df: DataFrame) -> None:
     :param year: int, the start year we want to be plotted
     :param df: pandas.dataframe, a cleaned dataframe including useful infos
     :return: None
+    >>> city_name = "Miami"
+    >>> year = 1950
+    >>> df =
+        city    Year   AvgTemp city_ascii  lat
+    0  Århus  1743.0  6.068000        NaN  NaN
+    1  Århus  1744.0  9.007125        NaN  NaN
+    2  Århus  1745.0  0.026500        NaN  NaN
+    3  Århus  1750.0  8.725545        NaN  NaN
+    4  Århus  1751.0  8.046375        NaN  NaN
+
+    None, with a plot output
     """
     df = df[df.Year >= year]  # extract the dataframe by given info
     city_case = df[df.city == city_name]
@@ -87,6 +133,18 @@ def plot_change_compare(city1: str, city2: str, year: int, df: DataFrame) -> Non
     :param year: int, input start year
     :param df: pandas.Dataframe, a well cleaned dataframe, including related infos
     :return: None, (with a plot to show)
+    >>> city1 = "Seattle"
+    >>> city2 = "Miami"
+    >>> year = 1950
+    >>> df =
+        city    Year   AvgTemp city_ascii  lat
+    0  Århus  1743.0  6.068000        NaN  NaN
+    1  Århus  1744.0  9.007125        NaN  NaN
+    2  Århus  1745.0  0.026500        NaN  NaN
+    3  Århus  1750.0  8.725545        NaN  NaN
+    4  Århus  1751.0  8.046375        NaN  NaN
+
+    None, with a figure output
     """
     df = df[df.Year >= year]
     city1_case = df[df.city == city1]
@@ -108,6 +166,15 @@ def change_in_100years(df: DataFrame) -> None:
     the temperature change from 1901 to 2000, according their latitude value
     :param df: pandas.Dataframe, raw temperature data for city in different years
     :return: None, with a plot shows
+    >>> df =
+        city    Year   AvgTemp city_ascii  lat
+    0  Århus  1743.0  6.068000        NaN  NaN
+    1  Århus  1744.0  9.007125        NaN  NaN
+    2  Århus  1745.0  0.026500        NaN  NaN
+    3  Århus  1750.0  8.725545        NaN  NaN
+    4  Århus  1751.0  8.046375        NaN  NaN
+
+    None, with a scatter plot output
     """
     df = df[df.lat >= 0]  # get only northern hemisphere
     df = df[df.Year.between(1901, 2000)]  # take data between 1901 and 2000
@@ -130,17 +197,18 @@ if __name__ == "__main__":
 
     # process and clean the data files
     tem_data = get_avg_temp("h1_data/GlobalLandTemperaturesByCity.csv")
+    # tem_data = get_avg_temp("h1_data/GlobalTemperatures_Sample.csv")
     asc_data = get_unique_ascii("h1_data/worldcities.csv")
 
-    # join the table for use, mapping city to ascii name
+    # # join the table for use, mapping city to ascii name
     joined_data = join_data(tem_data, asc_data)
-
-    # print(joined_data)
-    # plot temperature change for given city
+    #
+    # # print(joined_data)
+    # # plot temperature change for given city
     plot_temp_change("Miami", 1980, joined_data)
-
-    # comparison of the rate of change between the two cities
+    #
+    # # comparison of the rate of change between the two cities
     plot_change_compare("Seattle", "Miami", 1950, joined_data)
-
-    # plot the scatter plot, changes by latitude
+    #
+    # # plot the scatter plot, changes by latitude
     change_in_100years(joined_data)
